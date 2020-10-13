@@ -7,9 +7,9 @@ const radios = document.querySelectorAll('input');
 const names = document.querySelectorAll('#names');
 const resetButton = document.querySelector('#reset-button');
 
-for (let i = 0; i < radios.length; i++) {
-    const pokeArray = radios[i].value;
-}
+// for (let i = 0; i < radios.length; i++) {
+//     const pokeArray = radios[i].value;
+// }
 // initialize state
 // let encountered = 0;
 let captured = 0;
@@ -70,57 +70,78 @@ catchButton.addEventListener('click', () => {
         window.open('./results/index.html');
     }
     const selectedRadioButton = document.querySelector(':checked');
-    const capturedPokemon = selectedRadioButton.value;
+    const capturedPokemon = Number(selectedRadioButton.value);
     
-    console.log(rawPokemon, capturedPokemon);
     // find the Id of the pokemon captured
     // compare it to rawPokemon
-    const userSelectedPokemon = findById(rawPokemon, capturedPokemon);
     // not rawPokemon.id because there's no length of .id
-    console.log(userSelectedPokemon);
     // push new pokemon into array if not captured before
-    // or if captured before, increase quantity
+    // const test = capturedIncrement(capturedPokemon, pokemonCountArray);
 
+    // or if captured before, increase quantity
     
     // const test = e.target.value; this came out as an empty string
     generateRandomPokemon();
 });
 
-function incrementCaptured(itemCaptured, array) {
-
-    if (itemCaptured === undefined) {
-        const newPoke = {
-            pokemon: rawPokemon.pokemon,
-            encountered: 0,
-            captured: 1,
-        };
-        array.push(newPoke);
-    } else {
-        itemCaptured.captured++;
-    }
-
+function addNewCaptured(id, array) {
+    let result = findById(array, id);
+    // if (result === null) {
+    const newPoke = {
+        pokemon: result.pokemon,
+        id: result.id,
+        encountered: 0,
+        captured: 0,
+    };
+    array.push(newPoke);
+    // } 
 }
 
-
-// e.target.value = the id of whatever you clicked on.
-function encounteredPokemon() {
-
-    const pokemonInCart = findById(rawPokemon, pokeArray.id);
-    console.log(pokemonInCart);
-
-}
-console.log(encounteredPokemon());
-
-function findById(arrayPoke, pokeId) {
-    for (let i = 0; i < arrayPoke.length; i++) {
-        const item = arrayPoke[i];
+// function capturedIncrement(id, array) {
+//     let result = findById(array, id);
+//     if (!result) {
+//         // result.captured++;
+//         addNewCaptured(id, array);
+//         result = findById(array, id);
+//     } result.captured++;
+//     // } else {
+//         //     addNewCaptured(itemCaptured, array);
+//         //     result = findById(array, itemCaptured);
+//         // }
+// }
+    
+function findById(array, id) {
+    for (let i = 0; i < array.length; i++) {
+        const item = array[i];
         // is it item.name or item.id
-        if (item.id === pokeId) {
+        if (item.id === id) {
             return item;
         } 
-        return null;
-    } 
+    }
 }
+
+// e.target.value = the id of whatever you clicked on.
+// function encounteredPokemon() {
+
+//     const pokemonInCart = findById(rawPokemon, pokeArray.id);
+//     console.log(pokemonInCart);
+
+// }
+// console.log(encounteredPokemon());
+
+// function findById(arrayPoke, pokeId) {
+//     for (let i = 0; i < arrayPoke.length; i++) {
+//         const item = arrayPoke[i];
+//         // is it item.name or item.id
+//         if (item.id === pokeId) {
+//             return item;
+//         } 
+//         return null;
+//     } 
+// }
+// ^ this did not work for whatever reason!
+
+
 
 // console.log(capturedPokemon());
 // radios.addEventListener('change', (e) => {
