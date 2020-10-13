@@ -1,4 +1,3 @@
-// import functions and grab DOM elements
 import { rawPokemon } from './data.js';
 
 const catchButton = document.querySelector('#catch');
@@ -11,20 +10,9 @@ for (let i = 0; i < radios.length; i++) {
     const pokeArray = radios[i].value;
 }
 // each value needs to be added to the pokemonCountArray. Push.
-
-// initialize state
-// let encountered = 0;
-let captured = 0;
 let gameCounter = 0;
-let pokemonCountArray = [
-    // {
-    //     pokemon: '',
-    //     encountered: 0,
-    //     captured: 0,
-    // }
-];
+let pokemonCountArray = [];
 
-// set event listeners to update state and DOM
 function getPokemon(someArray) {
     const index = Math.floor(Math.random() * someArray.length);
 
@@ -61,22 +49,36 @@ function generateRandomPokemon() {
     images[2].src = pokemonThree.url_image;
     names[2].id = pokemonThree.pokemon;
     names[2].textContent = pokemonThree.pokemon;
+
+    addNewEncountered(pokemonOne.id, pokemonCountArray);
+    addNewEncountered(pokemonTwo.id, pokemonCountArray);
+    addNewEncountered(pokemonThree.id, pokemonCountArray);
 }
 
 generateRandomPokemon();
 
-
 catchButton.addEventListener('click', () => {
     gameCounter++;
     if (gameCounter === 10) {
-        window.open('./results/index.html');
+        window.location.href = './results/index.html';
     }
     const selectedRadioButton = document.querySelector(':checked');
     const capturedPokemon = Number(selectedRadioButton.value);
     
     capturedIncrement(capturedPokemon, pokemonCountArray);
+    console.log(pokemonCountArray);
     generateRandomPokemon();
 });
+
+function findById(array, id) {
+    for (let i = 0; i < array.length; i++) {
+        const item = array[i];
+        // is it item.name or item.id
+        if (item.id === id) {
+            return item;
+        } 
+    } 
+}
 
 function addNewCaptured(id, array) {
     let result = findById(rawPokemon, id);
@@ -98,14 +100,20 @@ function capturedIncrement(id, array) {
     } result.captured++;
 }
     
-function findById(array, id) {
-    for (let i = 0; i < array.length; i++) {
-        const item = array[i];
-        // is it item.name or item.id
-        if (item.id === id) {
-            return item;
-        } 
-    } 
+function addNewEncountered(id, array) {
+    let result = findById(array, id);
+    if (result) {
+        result.encountered++;
+    } else {     
+        let thePokemon = findById(rawPokemon, id);
+        const newPoke = {
+            pokemon: thePokemon.pokemon,
+            id,
+            encountered: 1,
+            captured: 0,
+        };
+        array.push(newPoke); 
+    }
 }
 
 // e.target.value = the id of whatever you clicked on.
