@@ -30,6 +30,7 @@ Event Listener
         - increment captured pokemon
         - generate three new pokemon
             - FUNCTION
+            - must be different
         - upon reaching 10, go to results page
     
 Results Page

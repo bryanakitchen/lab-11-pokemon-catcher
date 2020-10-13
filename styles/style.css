@@ -51,6 +51,10 @@ section {
     border: solid 2px var(--color1);
 }
 
+label > img {
+    height: 200px;
+}
+
 header {
     display: flex;
     justify-content: flex-end;
