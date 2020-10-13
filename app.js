@@ -1,5 +1,7 @@
 import { rawPokemon } from './data.js';
 
+const POKEMON = 'POKEMON';
+
 const catchButton = document.querySelector('#catch');
 const images = document.querySelectorAll('label > img');
 const radios = document.querySelectorAll('input');
@@ -60,6 +62,7 @@ generateRandomPokemon();
 catchButton.addEventListener('click', () => {
     gameCounter++;
     if (gameCounter === 10) {
+        setInLocalStorage(POKEMON, pokemonCountArray);
         window.location.href = './results/index.html';
     }
     const selectedRadioButton = document.querySelector(':checked');
@@ -116,45 +119,13 @@ function addNewEncountered(id, array) {
     }
 }
 
-// e.target.value = the id of whatever you clicked on.
-// function encounteredPokemon() {
+export function setInLocalStorage(key, value) {
+    const myString = JSON.stringify(value);
+    localStorage.setItem(key, myString);
+}
 
-//     const pokemonInCart = findById(rawPokemon, pokeArray.id);
-//     console.log(pokemonInCart);
+export function getFromLocalStorage(key) {
+    const myKey = localStorage.getItem(key);
+    return JSON.parse(myKey);
 
-// }
-
-// radios.addEventListener('change', (e) => {
-//     const capturedPokemon = e.target.value;
-//     console.log(capturedPokemon);
-//     return capturedPokemon;
-// });
-
-// pulling all the names
-// names[i].id = encounteredPokemon;
-// // this is only for encountered
-
-// export function renderTableRow(allPoke, newPoke) {
-//     const tr = document.createElement('tr');
-//     const thName = document.createElement('th');
-//     const thEncountered = document.createElement('th');
-//     const thCaught = document.createElement('th');
-
-//     thEncountered.textContent = cartItem.quantity;
-    
-//     const wigData = findById(wigs, cartItem.id);
-    
-//     const price = wigData.price;
-//     const theName = wigData.name;
-    
-//     tdName.textContent = theName;
-
-//     // new function 
-//     const subtotal = calcLineItem(price, cartItem.quantity);
-    
-//     tdSubtotal.textContent = `$${subtotal}`;
-
-//     tr.append(thName, thEncountered, thCaught);
-
-//     return tr;
-// }
+}
