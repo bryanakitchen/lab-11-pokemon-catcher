@@ -1,30 +1,30 @@
+import { getFromLocalStorage } from '../utils.js';
 
 function renderTable() {
-    // const tr = document.createElement('tr');
-    // const thName = document.createElement('th');
-    // const thEncountered = document.createElement('th');
-    // const thCaught = document.createElement('th');
-    const table = document.createElement('table');
-    
-    results.forEach(pokemon => {
-        const 
-    });
+    const table = document.querySelector('tbody');
+    const pokeResults = getFromLocalStorage('POKEMON') || [];
 
-    thEncountered.textContent = cartItem.quantity;
+    for (let i = 0; i < pokeResults.length; i++) {
+        const item = pokeResults[i];
     
-    const wigData = findById(wigs, cartItem.id);
+        const tr = renderTableRow(item);
     
-    const price = wigData.price;
-    const theName = wigData.name;
-    
-    tdName.textContent = theName;
+        table.appendChild(tr);
+    }
+}
+renderTable();
 
-    // new function 
-    const subtotal = calcLineItem(price, cartItem.quantity);
-    
-    tdSubtotal.textContent = `$${subtotal}`;
+function renderTableRow(pokemon) {
+    const tr = document.createElement('tr');
+    const tdName = document.createElement('td');
+    const thEncountered = document.createElement('td');
+    const thCaptured = document.createElement('td');
 
-    tr.append(thName, thEncountered, thCaught);
+    thEncountered.textContent = pokemon.captured;
+    thCaptured.textContent = pokemon.encountered;
+        
+    tdName.textContent = pokemon.pokemon;
 
+    tr.append(tdName, thEncountered, thCaptured);
     return tr;
 }

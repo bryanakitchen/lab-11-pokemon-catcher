@@ -1,4 +1,5 @@
 import { rawPokemon } from './data.js';
+import { setInLocalStorage } from './utils.js';
 
 const POKEMON = 'POKEMON';
 
@@ -55,21 +56,23 @@ function generateRandomPokemon() {
     addNewEncountered(pokemonOne.id, pokemonCountArray);
     addNewEncountered(pokemonTwo.id, pokemonCountArray);
     addNewEncountered(pokemonThree.id, pokemonCountArray);
+    
 }
 
 generateRandomPokemon();
 
+
 catchButton.addEventListener('click', () => {
     gameCounter++;
-    if (gameCounter === 10) {
+    if (gameCounter === 11) {
         setInLocalStorage(POKEMON, pokemonCountArray);
         window.location.href = './results/index.html';
-    }
+    } 
+
     const selectedRadioButton = document.querySelector(':checked');
     const capturedPokemon = Number(selectedRadioButton.value);
     
     capturedIncrement(capturedPokemon, pokemonCountArray);
-    console.log(pokemonCountArray);
     generateRandomPokemon();
 });
 
@@ -117,15 +120,4 @@ function addNewEncountered(id, array) {
         };
         array.push(newPoke); 
     }
-}
-
-export function setInLocalStorage(key, value) {
-    const myString = JSON.stringify(value);
-    localStorage.setItem(key, myString);
-}
-
-export function getFromLocalStorage(key) {
-    const myKey = localStorage.getItem(key);
-    return JSON.parse(myKey);
-
 }
