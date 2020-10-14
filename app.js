@@ -42,16 +42,19 @@ function generateRandomPokemon() {
     images[0].src = pokemonOne.url_image;
     names[0].id = pokemonOne.pokemon;
     names[0].textContent = pokemonOne.pokemon;
+    radios[0].checked = false;
     
     radios[1].value = pokemonTwo.id;
     images[1].src = pokemonTwo.url_image;
     names[1].id = pokemonTwo.pokemon;
     names[1].textContent = pokemonTwo.pokemon;
+    radios[1].checked = false;
     
     radios[2].value = pokemonThree.id;
     images[2].src = pokemonThree.url_image;
     names[2].id = pokemonThree.pokemon;
     names[2].textContent = pokemonThree.pokemon;
+    radios[2].checked = false;
 
     addNewEncountered(pokemonOne.id, pokemonCountArray);
     addNewEncountered(pokemonTwo.id, pokemonCountArray);
