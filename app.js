@@ -7,7 +7,7 @@ const catchButton = document.querySelector('#catch');
 const images = document.querySelectorAll('label > img');
 const radios = document.querySelectorAll('input');
 const names = document.querySelectorAll('#names');
-const resetButton = document.querySelector('#reset-button');
+// const resetButton = document.querySelector('#reset-button');
 
 for (let i = 0; i < radios.length; i++) {
     const pokeArray = radios[i].value;
