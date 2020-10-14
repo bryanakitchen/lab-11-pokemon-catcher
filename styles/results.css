@@ -1,0 +1,24 @@
+table {
+    background-color: #FFDE00;
+    padding: 10px;
+    border-spacing: 5px;
+    border-radius: 10px;
+}
+
+td, th {
+    border: solid 1px;
+    text-transform: capitalize;
+    padding: 5px 3px;
+}
+
+th {
+    font-weight: bold;
+}
+
+td {
+    border-spacing: 5px;
+}
+
+tr:nth-child(even) {
+    background: rgba(235, 247, 247, 0.89);
+}
